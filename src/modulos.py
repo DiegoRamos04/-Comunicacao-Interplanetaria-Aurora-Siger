@@ -3,8 +3,7 @@ import pandas as pd
 from pathlib import Path
 
 from .historico import registrar_historico
-# Se quiser, pode remover a importação de 'tabela.py' neste arquivo, 
-# pois o Pandas fará a formatação da tabela automaticamente.
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PASTA_DATA = BASE_DIR / "data"
