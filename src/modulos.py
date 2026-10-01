@@ -2,7 +2,7 @@ import json
 import pandas as pd
 from pathlib import Path
 
-from .historico import registrar_historico
+
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -54,11 +54,7 @@ def consultar_modulos():
     print(df_exibicao.to_string())
     print("=" * 100)
 
-    registrar_historico(
-        "Consulta de módulos",
-        "Sistema",
-        "Consulta geral dos módulos utilizando Pandas",
-    )
+
 
 def consultar_modulo_especifico():
     """Consulta detalhada de um módulo, mostrando todas as novas chaves elétricas"""
@@ -99,8 +95,3 @@ def consultar_modulo_especifico():
 
     print("=" * 60)
 
-    registrar_historico(
-        "Consulta de módulo",
-        nome,
-        f"Consulta detalhada do módulo {nome}",
-    )

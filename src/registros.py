@@ -1,8 +1,7 @@
 from pathlib import Path
 from datetime import datetime
 
-from src.historico import registrar_historico
-from src.tabela import exibir_tabela
+
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,11 +43,7 @@ def cadastrar_registro():
     with open(ARQUIVO_TXT, "a", encoding="utf-8") as arquivo:
         arquivo.write(linha + "\n")
 
-    registrar_historico(
-        "Cadastro de registro",
-        modulo,
-        f"Ocorrência registrada: {descricao} | Responsável: {responsavel}",
-    )
+
 
     print("\n" + "-" * 70)
     print("Registro salvo com sucesso!")
@@ -85,16 +80,7 @@ def consultar_registros():
         except (IndexError, ValueError):
             tabela.append([numero, "N/A", "N/A", linha, "N/A"])
 
-    exibir_tabela(
-        ["ID", "Data/Hora", "Módulo", "Ocorrência", "Responsável"],
-        tabela,
-        [5, 16, 24, 50, 24],
-    )
+    print(tabela)
 
     print(f"\nTotal de registros: {len(tabela)}")
 
-    registrar_historico(
-        "Consulta de registros",
-        "Sistema",
-        f"Consulta geral realizada. Total de registros: {len(tabela)}",
-    )
