@@ -1,0 +1,154 @@
+{
+    "modulos": {
+        "Habitação": {
+            "codigo_dispositivo": "MOD-HAB-01",
+            "consumo_energetico_kwh": 120,
+            "tensao_v": 220,
+            "potencia_aproximada_w": 5000,
+            "corrente_a": 22.73,
+            "prioridade_operacional": 2,
+            "capacidade_armazenamento": "500 kWh / 1000L Água",
+            "necessidade_comunicacao": "Média",
+            "latencia_estimada_ms": 45,
+            "latencia_observada_ms": 52,
+            "status_operacional": "Ativo",
+            "data_registro": "2026-09-30T18:00:00",
+            "conexoes": [
+                ["Centro de controle", 50],
+                ["Suporte médico", 20],
+                ["Produção de oxigênio", 80],
+                ["Agricultura", 100]
+            ]
+        },
+        "Centro de controle": {
+            "codigo_dispositivo": "MOD-CEN-01",
+            "consumo_energetico_kwh": 85,
+            "tensao_v": 380,
+            "potencia_aproximada_w": 3540,
+            "corrente_a": 9.32,
+            "prioridade_operacional": 1,
+            "capacidade_armazenamento": "Servidores / Nobreaks",
+            "necessidade_comunicacao": "Altíssima",
+            "latencia_estimada_ms": 8,
+            "latencia_observada_ms": 12,
+            "status_operacional": "Ativo",
+            "data_registro": "2026-09-30T18:00:00",
+            "conexoes": [
+                ["Habitação", 50],
+                ["Comunicação", 30],
+                ["Armazenamento de energia", 150],
+                ["Laboratório científico", 120]
+            ]
+        },
+        "Armazenamento de energia": {
+            "codigo_dispositivo": "MOD-ARM-01",
+            "consumo_energetico_kwh": 15,
+            "tensao_v": 380,
+            "potencia_aproximada_w": 625,
+            "corrente_a": 1.64,
+            "prioridade_operacional": 1,
+            "capacidade_armazenamento": "50.000 kWh",
+            "necessidade_comunicacao": "Média",
+            "latencia_estimada_ms": 50,
+            "latencia_observada_ms": 55,
+            "status_operacional": "Ativo",
+            "data_registro": "2026-09-30T18:00:00",
+            "conexoes": [
+                ["Centro de controle", 150],
+                ["Produção de oxigênio", 200],
+                ["Agricultura", 300]
+            ]
+        },
+        "Agricultura": {
+            "codigo_dispositivo": "MOD-AGR-01",
+            "consumo_energetico_kwh": 250,
+            "tensao_v": 220,
+            "potencia_aproximada_w": 10416,
+            "corrente_a": 47.35,
+            "prioridade_operacional": 3,
+            "capacidade_armazenamento": "Estufas / Água",
+            "necessidade_comunicacao": "Baixa",
+            "latencia_estimada_ms": 120,
+            "latencia_observada_ms": 135,
+            "status_operacional": "Ativo",
+            "data_registro": "2026-09-30T18:00:00",
+            "conexoes": [
+                ["Habitação", 100],
+                ["Armazenamento de energia", 300],
+                ["Laboratório científico", 60]
+            ]
+        },
+        "Laboratório científico": {
+            "codigo_dispositivo": "MOD-LAB-01",
+            "consumo_energetico_kwh": 180,
+            "tensao_v": 220,
+            "potencia_aproximada_w": 7500,
+            "corrente_a": 34.09,
+            "prioridade_operacional": 4,
+            "capacidade_armazenamento": "Amostras / Equipamentos",
+            "necessidade_comunicacao": "Alta",
+            "latencia_estimada_ms": 20,
+            "latencia_observada_ms": 28,
+            "status_operacional": "Ativo",
+            "data_registro": "2026-09-30T18:00:00",
+            "conexoes": [
+                ["Centro de controle", 120],
+                ["Agricultura", 60],
+                ["Suporte médico", 90]
+            ]
+        },
+        "Comunicação": {
+            "codigo_dispositivo": "MOD-COM-01",
+            "consumo_energetico_kwh": 95,
+            "tensao_v": 220,
+            "potencia_aproximada_w": 3958,
+            "corrente_a": 17.99,
+            "prioridade_operacional": 2,
+            "capacidade_armazenamento": "Terabytes",
+            "necessidade_comunicacao": "Altíssima",
+            "latencia_estimada_ms": 5,
+            "latencia_observada_ms": 185,
+            "status_operacional": "Alerta",
+            "data_registro": "2026-09-30T18:00:00",
+            "conexoes": [
+                ["Centro de controle", 30]
+            ]
+        },
+        "Suporte médico": {
+            "codigo_dispositivo": "MOD-MED-01",
+            "consumo_energetico_kwh": 60,
+            "tensao_v": 380,
+            "potencia_aproximada_w": 2500,
+            "corrente_a": 6.58,
+            "prioridade_operacional": 1,
+            "capacidade_armazenamento": "Suprimentos médicos",
+            "necessidade_comunicacao": "Média",
+            "latencia_estimada_ms": 40,
+            "latencia_observada_ms": 42,
+            "status_operacional": "Ativo",
+            "data_registro": "2026-09-30T18:00:00",
+            "conexoes": [
+                ["Habitação", 20],
+                ["Laboratório científico", 90]
+            ]
+        },
+        "Produção de oxigênio": {
+            "codigo_dispositivo": "MOD-OXI-01",
+            "consumo_energetico_kwh": 300,
+            "tensao_v": 380,
+            "potencia_aproximada_w": 12500,
+            "corrente_a": 32.89,
+            "prioridade_operacional": 1,
+            "capacidade_armazenamento": "Tanques O2",
+            "necessidade_comunicacao": "Baixa",
+            "latencia_estimada_ms": 100,
+            "latencia_observada_ms": 105,
+            "status_operacional": "Ativo",
+            "data_registro": "2026-09-30T18:00:00",
+            "conexoes": [
+                ["Habitação", 80],
+                ["Armazenamento de energia", 200]
+            ]
+        }
+    }
+}
