@@ -5,11 +5,11 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-ARQUIVO_JSON = BASE_DIR / "data" / "dados_colonia.json"
+ARQUIVO_JSON = BASE_DIR / "data" / "dados_aurora_siger.json"
 
 def avaliar_modelo_latencia():
     print("\n" + "=" * 80)
-    print("      AVALIAÇÃO DE PERFORMANCE DO MODELO DE LATÊNCIA (ETAPA 1.3)")
+    print("      AVALIAÇÃO DE PERFORMANCE DO MODELO DE LATÊNCIA ")
     print("=" * 80)
 
     # 1. Carregar os dados

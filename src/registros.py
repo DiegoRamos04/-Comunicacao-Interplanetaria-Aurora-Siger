@@ -1,13 +1,9 @@
 from pathlib import Path
 from datetime import datetime
 
-
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 PASTA_DATA = BASE_DIR / "data"
 ARQUIVO_TXT = PASTA_DATA / "registros_colonia.txt"
-
 
 def cadastrar_registro():
     print("\n")
@@ -43,12 +39,9 @@ def cadastrar_registro():
     with open(ARQUIVO_TXT, "a", encoding="utf-8") as arquivo:
         arquivo.write(linha + "\n")
 
-
-
     print("\n" + "-" * 70)
     print("Registro salvo com sucesso!")
     print("-" * 70)
-
 
 def consultar_registros():
     print("\n")

@@ -2,78 +2,75 @@ import json
 import pandas as pd
 from pathlib import Path
 
-
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 PASTA_DATA = BASE_DIR / "data"
-ARQUIVO_JSON = PASTA_DATA / "dados_colonia.json"
+ARQUIVO_JSON = PASTA_DATA / "dados_aurora_siger.json"
 
 def carregar_dados():
-    """Carrega os dados JSON (Requisito 1.2: Ler registros e JSON)"""
     try:
         with open(ARQUIVO_JSON, "r", encoding="utf-8") as arquivo:
             return json.load(arquivo)
     except FileNotFoundError:
-        print(f"Erro: Arquivo {ARQUIVO_JSON} não encontrado.")
+        print(f"Erro: Arquivo {ARQUIVO_JSON.name} não encontrado na pasta data.")
         return None
 
 def salvar_dados(dados):
-    """Salva modificações de volta no arquivo JSON (Requisito 1.2: Salvar dados JSON)"""
     with open(ARQUIVO_JSON, "w", encoding="utf-8") as arquivo:
         json.dump(dados, arquivo, ensure_ascii=False, indent=4)
 
 def consultar_modulos():
-    """Usa PANDAS para ler, organizar e exibir os dados (Requisito 1.1 e 1.2)"""
     print("\n" + "=" * 100)
     print("           STATUS DOS MÓDULOS DA COLÔNIA AURORA SIGER (ANÁLISE PANDAS)")
     print("=" * 100)
 
     dados = carregar_dados()
     if not dados or "modulos" not in dados:
-        print("Nenhum módulo cadastrado ou erro na base de dados.")
-        return
+        return 
 
-    # Converte o dicionário de módulos em um DataFrame do Pandas
-    # orient='index' usa o nome do módulo (ex: 'Habitação') como índice da linha
     df = pd.DataFrame.from_dict(dados['modulos'], orient='index')
 
-    # Seleciona as colunas mais importantes para mostrar na tabela geral
     df_exibicao = df[[
         'codigo_dispositivo', 'status_operacional', 'tensao_v', 
-        'potencia_w', 'latencia_estimada_ms', 'latencia_observada_ms'
+        'potencia_aproximada_w', 'latencia_estimada_ms', 'latencia_observada_ms'
     ]]
 
-    # Renomeia as colunas para a exibição ficar mais legível no terminal
     df_exibicao.columns = [
         'Código', 'Status', 'Tensão(V)', 'Potência(W)', 
         'Lat. Estimada(ms)', 'Lat. Observada(ms)'
     ]
 
-    # Exibe a tabela formatada pelo próprio Pandas
     print(df_exibicao.to_string())
     print("=" * 100)
 
-
-
 def consultar_modulo_especifico():
-    """Consulta detalhada de um módulo, mostrando todas as novas chaves elétricas"""
     dados = carregar_dados()
+    if not dados or "modulos" not in dados:
+        return 
+        
     modulos = dados.get("modulos", {})
 
     print("\nMódulos disponíveis:")
     for nome in modulos:
         print(f"- {nome}")
 
-    nome = input("\nDigite o nome do módulo: ").strip()
-    info = modulos.get(nome)
+    nome_digitado = input("\nDigite o nome do módulo: ").strip().lower()
+    
+    # Sistema de busca que ignora letras maiúsculas ou minúsculas
+    chave_correta = None
+    for chave in modulos.keys():
+        if chave.lower() == nome_digitado:
+            chave_correta = chave
+            break
 
-    if info is None:
-        print("Módulo não encontrado.")
+    if not chave_correta:
+        print("\n[!] Módulo não encontrado. Verifique a ortografia e tente novamente.")
         return
+        
+    info = modulos[chave_correta]
+    nome_oficial = chave_correta
 
     print("\n" + "=" * 60)
-    print(f"              {nome.upper()} ({info['codigo_dispositivo']})")
+    print(f"              {nome_oficial.upper()} ({info['codigo_dispositivo']})")
     print("=" * 60)
     print(f"Status:                 {info['status_operacional']}")
     print(f"Prioridade operacional: {info['prioridade_operacional']}")
@@ -82,7 +79,7 @@ def consultar_modulo_especifico():
     print("MÉTRICAS ELÉTRICAS (LEI DE OHM):")
     print(f"Tensão:                 {info['tensao_v']} V")
     print(f"Corrente:               {info['corrente_a']} A")
-    print(f"Potência Aproximada:    {info['potencia_w']} W")
+    print(f"Potência Aproximada:    {info['potencia_aproximada_w']} W")
     print("-" * 60)
     print("MÉTRICAS DE COMUNICAÇÃO E REDE:")
     print(f"Necessidade:            {info['necessidade_comunicacao']}")
@@ -92,6 +89,5 @@ def consultar_modulo_especifico():
     print("\nConexões:")
     for destino, distancia in info["conexoes"]:
         print(f"  → {destino}: peso/distância {distancia}")
-
     print("=" * 60)
 

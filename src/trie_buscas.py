@@ -2,11 +2,11 @@ import json
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-ARQUIVO_JSON = BASE_DIR / "data" / "dados_colonia.json"
+ARQUIVO_JSON = BASE_DIR / "data" / "dados_aurora_siger.json"
 
-# ==========================================
+
 # ETAPA 1.5: ESTRUTURAS DA ÁRVORE TRIE
-# ==========================================
+
 class NodoTrie:
     def __init__(self):
         self.filhos = {}
@@ -50,12 +50,12 @@ class Trie:
         
         return resultados
 
-# ==========================================
-# ETAPA 1.6: CONVERSÃO DE BASES E EXIBIÇÃO
-# ==========================================
+
+# Etapa 1.6: Conversão de bases e exibição
+
 def executar_busca_trie():
     print("\n" + "=" * 80)
-    print("      SISTEMA DE BUSCA RÁPIDA (TRIE) E CONVERSÃO DE BASES (ETAPAS 1.5 E 1.6)")
+    print("      SISTEMA DE BUSCA RÁPIDA (TRIE) E CONVERSÃO DE BASES ")
     print("=" * 80)
 
     # 1. Carregar Dados

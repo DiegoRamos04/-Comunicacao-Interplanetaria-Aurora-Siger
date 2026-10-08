@@ -14,10 +14,22 @@
             "status_operacional": "Ativo",
             "data_registro": "2026-09-30T18:00:00",
             "conexoes": [
-                ["Centro de controle", 50],
-                ["Suporte médico", 20],
-                ["Produção de oxigênio", 80],
-                ["Agricultura", 100]
+                [
+                    "Centro de controle",
+                    50
+                ],
+                [
+                    "Suporte médico",
+                    20
+                ],
+                [
+                    "Produção de oxigênio",
+                    80
+                ],
+                [
+                    "Agricultura",
+                    100
+                ]
             ]
         },
         "Centro de controle": {
@@ -34,10 +46,22 @@
             "status_operacional": "Ativo",
             "data_registro": "2026-09-30T18:00:00",
             "conexoes": [
-                ["Habitação", 50],
-                ["Comunicação", 30],
-                ["Armazenamento de energia", 150],
-                ["Laboratório científico", 120]
+                [
+                    "Habitação",
+                    50
+                ],
+                [
+                    "Comunicação",
+                    30
+                ],
+                [
+                    "Armazenamento de energia",
+                    150
+                ],
+                [
+                    "Laboratório científico",
+                    120
+                ]
             ]
         },
         "Armazenamento de energia": {
@@ -54,9 +78,18 @@
             "status_operacional": "Ativo",
             "data_registro": "2026-09-30T18:00:00",
             "conexoes": [
-                ["Centro de controle", 150],
-                ["Produção de oxigênio", 200],
-                ["Agricultura", 300]
+                [
+                    "Centro de controle",
+                    150
+                ],
+                [
+                    "Produção de oxigênio",
+                    200
+                ],
+                [
+                    "Agricultura",
+                    300
+                ]
             ]
         },
         "Agricultura": {
@@ -69,13 +102,22 @@
             "capacidade_armazenamento": "Estufas / Água",
             "necessidade_comunicacao": "Baixa",
             "latencia_estimada_ms": 120,
-            "latencia_observada_ms": 135,
-            "status_operacional": "Ativo",
+            "latencia_observada_ms": 729,
+            "status_operacional": "Alerta - Invasão Detectada",
             "data_registro": "2026-09-30T18:00:00",
             "conexoes": [
-                ["Habitação", 100],
-                ["Armazenamento de energia", 300],
-                ["Laboratório científico", 60]
+                [
+                    "Habitação",
+                    100
+                ],
+                [
+                    "Armazenamento de energia",
+                    300
+                ],
+                [
+                    "Laboratório científico",
+                    60
+                ]
             ]
         },
         "Laboratório científico": {
@@ -92,9 +134,18 @@
             "status_operacional": "Ativo",
             "data_registro": "2026-09-30T18:00:00",
             "conexoes": [
-                ["Centro de controle", 120],
-                ["Agricultura", 60],
-                ["Suporte médico", 90]
+                [
+                    "Centro de controle",
+                    120
+                ],
+                [
+                    "Agricultura",
+                    60
+                ],
+                [
+                    "Suporte médico",
+                    90
+                ]
             ]
         },
         "Comunicação": {
@@ -111,7 +162,10 @@
             "status_operacional": "Alerta",
             "data_registro": "2026-09-30T18:00:00",
             "conexoes": [
-                ["Centro de controle", 30]
+                [
+                    "Centro de controle",
+                    30
+                ]
             ]
         },
         "Suporte médico": {
@@ -128,8 +182,14 @@
             "status_operacional": "Ativo",
             "data_registro": "2026-09-30T18:00:00",
             "conexoes": [
-                ["Habitação", 20],
-                ["Laboratório científico", 90]
+                [
+                    "Habitação",
+                    20
+                ],
+                [
+                    "Laboratório científico",
+                    90
+                ]
             ]
         },
         "Produção de oxigênio": {
@@ -146,8 +206,14 @@
             "status_operacional": "Ativo",
             "data_registro": "2026-09-30T18:00:00",
             "conexoes": [
-                ["Habitação", 80],
-                ["Armazenamento de energia", 200]
+                [
+                    "Habitação",
+                    80
+                ],
+                [
+                    "Armazenamento de energia",
+                    200
+                ]
             ]
         }
     }
