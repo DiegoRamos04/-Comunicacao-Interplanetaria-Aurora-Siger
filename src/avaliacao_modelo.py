@@ -27,6 +27,14 @@ def avaliar_modelo_latencia():
     y_pred = df['latencia_estimada_ms']
     y_true = df['latencia_observada_ms']
 
+    # Cálculo do Erro Absoluto e Relativo linha a linha (Requisito 5.2)
+    df['erro_absoluto'] = abs(y_true - y_pred)
+    # Evita divisão por zero caso a latência estimada seja 0
+    df['erro_relativo'] = np.where(y_pred != 0, df['erro_absoluto'] / y_pred, 0)
+    
+    print("\nAmostra de Análise Numérica (Erro Absoluto e Relativo):")
+    print(df[['latencia_observada_ms', 'latencia_estimada_ms', 'erro_absoluto', 'erro_relativo']].head())
+
     # 2. Cálculo das métricas
     mae = mean_absolute_error(y_true, y_pred)
     mse = mean_squared_error(y_true, y_pred)
@@ -90,6 +98,11 @@ def avaliar_modelo_latencia():
     print("(ponto fora da curva). O RMSE penaliza erros maiores, e como o módulo de")
     print("Comunicação teve um pico de 185ms (contra 5ms previstos), o MSE e o RMSE")
     print("explodiram, denunciando a anomalia na rede da Aurora Siger.")
+    print("\nAlém disso, a análise do Erro Relativo revelou-se fundamental para a colônia.")
+    print("Como os módulos operam em escalas de latência completamente diferentes, o erro")
+    print("relativo permite comparar a gravidade do desvio de forma percentual e justa.")
+    print("Isso garante que um desvio num módulo crítico não passe despercebido, enquanto")
+    print("pequenas oscilações aceitáveis em módulos secundários não gerem falsos alarmes.")
     print("=" * 80)
 
 if __name__ == "__main__":

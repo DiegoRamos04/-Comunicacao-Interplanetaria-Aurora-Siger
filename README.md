@@ -11,6 +11,7 @@ O projeto também integra conceitos de estruturas de dados avançadas para busca
 * **Sistema de Alertas:** Utilização de estruturas de Heap (`alertas_heap.py`) para classificar e escalonar anomalias na infraestrutura elétrica com base na gravidade.
 * **Avaliação e Métricas:** Validação do desempenho dos algoritmos e da precisão do processamento de dados (`avaliacao_modelo.py`).
 * **Visualização de Anomalias:** Geração de análises visuais do comportamento da rede elétrica.
+- **Simulação Dinâmica (EDO):** Modelagem da evolução temporal e estabilização de enlaces de comunicação utilizando Equações Diferenciais Ordinárias resolvidas numericamente via `scipy.integrate.solve_ivp` (`dinamica_rede.py`).
 
 ## Tecnologias Utilizadas
 * **Linguagem:** Python
@@ -42,6 +43,23 @@ O projeto também integra conceitos de estruturas de dados avançadas para busca
 │
 └── 📁 docs/                       # Documentações e fundamentação teórica
 ```
+## Análise de Complexidade (Fundamentação Teórica)
+Para garantir que o SCIC opere com eficiência em cenários de alta criticidade na colônia Aurora Siger, o projeto aplica conceitos de análise assintótica de algoritmos:
+
+- **Buscas Otimizadas (Trie):** As operações de inserção e recuperação por prefixo possuem complexidade de tempo **O(m)** (onde *m* é o tamanho do prefixo), superando a busca linear tradicional.
+- **Fila de Prioridade (Heap):** O escalonamento de alertas críticos utiliza operações logarítmicas **O(log n)** para inserção e remoção de prioridades.
+- **Trade-off Espaço-Tempo:** O isolamento de falhas na simulação utiliza cópias estruturais em memória RAM, priorizando a segurança dos dados persistidos em detrimento de um consumo controlado de espaço auxiliar.
+
+## 🔬 Fundamentação Teórica e Métodos Numéricos
+
+Para garantir a precisão, a estabilidade e a confiabilidade nas transmissões críticas da colônia Aurora Siger, o SCIC incorpora os seguintes fundamentos matemáticos e computacionais estudados no projeto:
+
+- **Aritmética de Ponto Flutuante (IEEE 754):** Os cálculos de latência e consumo elétrico respeitam os limites de representação de 64 bits da máquina, considerando o epsilon do sistema (`ε ≈ 2.22 × 10⁻¹⁶`) para mitigar erros de arredondamento inerentes à conversão binária.
+- **Análise de Erros:** Utilização rigorosa de **Erro Absoluto** (para preservar a unidade original em milissegundos) e **Erro Relativo** (para comparar desvios percentuais justos entre módulos que operam em escalas de latência completamente distintas).
+- **Simulação Dinâmica (EDO):** Modelagem matemática da recuperação de enlaces de rede degradados utilizando Equações Diferenciais Ordinárias (EDOs) e métodos incrementais inspirados na discretização temporal (passo `h`).
+- **Estruturas de Dados Avançadas:** 
+  - **Árvores Trie:** Buscas por prefixo com complexidade de tempo `O(m)` para recuperação instantânea de módulos, comandos e códigos de sensores.
+  - **Fila de Prioridade (Heap):** Escalonamento e atendimento de alertas críticos em tempo logarítmico `O(log n)`, garantindo resposta imediata a anomalias severas na rede da colônia.
 
 ## Como Executar o Projeto
 

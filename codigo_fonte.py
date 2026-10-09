@@ -11,7 +11,7 @@ from src.registros import cadastrar_registro, consultar_registros
 from src.avaliacao_modelo import avaliar_modelo_latencia
 from src.alertas_heap import gerenciar_alertas
 from src.trie_buscas import executar_busca_trie
-
+from src.dinamica_rede import simular_evolucao_latencia
 
 BASE_DIR = Path(__file__).resolve().parent
 ARQUIVO_JSON = BASE_DIR / "data" / "dados_aurora_siger.json"
@@ -63,6 +63,7 @@ def exibir_menu():
         print("6. Processar Alertas Críticos (Fila de Prioridade / Heap)")
         print("7. Busca Ultrarrápida de Módulos (Árvore Trie & Conv. Bases)")
         print("8. [SIMULAÇÃO] Lançar Ataque Aleatório na Rede")
+        print("9. Simular Evolução Dinâmica da Rede (EDO & SciPy solve_ivp)")
         print("0. Encerrar Sistema")
         print("=" * 60)
 
@@ -84,6 +85,8 @@ def exibir_menu():
             executar_busca_trie()
         elif opcao == '8':
             simular_ataque_aleatorio()
+        elif opcao == '9':
+            simular_evolucao_latencia()
         elif opcao == '0':
             print("\nEncerrando comunicação com a Colônia Aurora Siger. Até logo!")
             sys.exit()
