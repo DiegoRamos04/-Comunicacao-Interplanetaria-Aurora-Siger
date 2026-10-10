@@ -11,7 +11,7 @@ def gerenciar_alertas(dados_customizados=None):
     print("      SISTEMA DE PRIORIZAÇÃO DE ALERTAS (ETAPAS 1.2 E 1.4 - HEAP)")
     print("=" * 80)
 
-    # Se recebeu dados simulados da memória, usa eles. Se não, lê o arquivo normal.
+    # Se recebeu os dados simulados da memória, usa eles. Se não, lê o arquivo normal.
     if dados_customizados:
         dados = dados_customizados
     else:
@@ -56,7 +56,15 @@ def gerenciar_alertas(dados_customizados=None):
         print(f"   Módulo:     {nome_modulo}")
         print(f"   Prioridade: Nível {prioridade_alerta}")
         print(f"   Erro Abs.:  {erro_abs_alerta} ms de atraso na rede")
-        print(f"   Erro Rel.:  {erro_rel_alerta:.2f}% de anomalia\n")
+        print(f"   Erro Rel.:  {erro_rel_alerta:.2f}% de anomalia")
+        
+        # ADMS, FLISR e Microrredes
+        if prioridade_alerta == 1 or erro_rel_alerta > 100:
+            print("   [ADMS] Ação Automática: Isolando falha (FLISR).")
+            print("   [ADMS] Comutando microrrede para 'Operação Ilhada' para garantir estabilidade local.\n")
+        else:
+            print("   [ADMS] Ação Automática: Ajustando fluxo via inversores inteligentes e manutenção preditiva.\n")
+            
         ordem += 1
 
     print("=" * 80)

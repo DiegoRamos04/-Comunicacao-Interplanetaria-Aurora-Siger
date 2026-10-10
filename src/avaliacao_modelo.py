@@ -4,17 +4,33 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from pathlib import Path
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+import statsmodels.api as sm
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 ARQUIVO_JSON = BASE_DIR / "data" / "dados_aurora_siger.json"
 PASTA_GRAFICOS = BASE_DIR / "graficos_ou_imagens"
+
+def gerar_historico_simulado(n_amostras=150):
+    np.random.seed(42)
+    consumo = np.random.uniform(10, 300, n_amostras)
+    potencia = consumo * (1000 / 24) * np.random.uniform(0.8, 1.2, n_amostras)
+    latencia_real = 5 + (potencia * 0.015) + np.random.normal(0, 15, n_amostras)
+    latencia_real = np.maximum(1, latencia_real)
+    
+    return pd.DataFrame({
+        'consumo_kwh': consumo,
+        'potencia_w': potencia,
+        'latencia_ms': latencia_real
+    })
 
 def avaliar_modelo_latencia():
     print("\n" + "=" * 80)
     print("      AVALIAÇÃO DE PERFORMANCE DO MODELO DE LATÊNCIA ")
     print("=" * 80)
 
-    # 1. Carregar os dados
+    # Carregar os dados
     try:
         with open(ARQUIVO_JSON, "r", encoding="utf-8") as file:
             dados = json.load(file)
@@ -27,7 +43,7 @@ def avaliar_modelo_latencia():
     y_pred = df['latencia_estimada_ms']
     y_true = df['latencia_observada_ms']
 
-    # Cálculo do Erro Absoluto e Relativo linha a linha (Requisito 5.2)
+    # Cálculo do Erro Absoluto e Relativo 
     df['erro_absoluto'] = abs(y_true - y_pred)
     # Evita divisão por zero caso a latência estimada seja 0
     df['erro_relativo'] = np.where(y_pred != 0, df['erro_absoluto'] / y_pred, 0)
@@ -35,38 +51,32 @@ def avaliar_modelo_latencia():
     print("\nAmostra de Análise Numérica (Erro Absoluto e Relativo):")
     print(df[['latencia_observada_ms', 'latencia_estimada_ms', 'erro_absoluto', 'erro_relativo']].head())
 
-    # 2. Cálculo das métricas
+    # Cálculo das métricas
     mae = mean_absolute_error(y_true, y_pred)
     mse = mean_squared_error(y_true, y_pred)
     rmse = np.sqrt(mse)
     r2 = r2_score(y_true, y_pred)
 
-    # 3. Exibição dos Resultados no Terminal
+    # Exibição dos Resultados no Terminal
     print(f"Métricas Principais do Modelo:")
     print(f"- MAE (Erro Absoluto Médio):       {mae:.2f} ms")
     print(f"- MSE (Erro Quadrático Médio):     {mse:.2f} ms²")
     print(f"- RMSE (Raiz do Erro Quadrático):  {rmse:.2f} ms")
     print(f"- R² (Coef. de Determinação):      {r2:.4f}")
     
-    # 4. Geração do Gráfico Futurista (Dark Mode)
+    # Geração do Gráfico 
     try:
         PASTA_GRAFICOS.mkdir(exist_ok=True)
         
-        # Configuração do fundo escuro
-        fig, ax = plt.subplots(figsize=(10, 6))
-        fig.patch.set_facecolor('#0d1117') # Cor de fundo da imagem (estilo GitHub Dark)
-        ax.set_facecolor('#161b22')        # Cor de fundo da área do gráfico
         
-        # Plot das linhas e pontos com cores vibrantes (Cyan e Red)
+        fig, ax = plt.subplots(figsize=(10, 6))
+        fig.patch.set_facecolor('#0d1117') 
+        ax.set_facecolor('#161b22')        
         ax.plot(df.index, y_pred, label='Latência Estimada (Normal)', color='#00ffcc', marker='o', linestyle='--', linewidth=2)
         ax.scatter(df.index, y_true, label='Latência Observada (Anomalia)', color='#ff3333', s=100, zorder=5)
-        
-        # Personalização dos Textos
         ax.set_title('PAINEL DE TELEMETRIA: Latência da Rede (Aurora Siger)', color='white', fontsize=14, fontweight='bold', pad=15)
         ax.set_ylabel('Tempo de Latência (ms)', color='#c9d1d9', fontsize=12)
         ax.set_xlabel('Módulos da Colônia', color='#c9d1d9', fontsize=12)
-        
-        # Personalização dos Eixos e Grelha
         ax.tick_params(axis='x', colors='#c9d1d9', rotation=45)
         ax.tick_params(axis='y', colors='#c9d1d9')
         for spine in ax.spines.values():
@@ -74,12 +84,10 @@ def avaliar_modelo_latencia():
             
         ax.grid(True, color='#30363d', linestyle=':', linewidth=1)
         
-        # Personalização da Legenda
         legend = ax.legend(facecolor='#0d1117', edgecolor='#30363d', labelcolor='white')
         
         plt.tight_layout()
         
-        # Salvar o ficheiro
         caminho_imagem = PASTA_GRAFICOS / "grafico_anomalia_rede.png"
         plt.savefig(caminho_imagem, facecolor=fig.get_facecolor(), edgecolor='none')
         plt.close()
@@ -87,7 +95,7 @@ def avaliar_modelo_latencia():
     except Exception as e:
         print(f"\nNão foi possível gerar o gráfico visual: {e}")
 
-    # 5. Interpretação
+    # Interpretação
     print("\n" + "-" * 80)
     print("INTERPRETAÇÃO DOS RESULTADOS (DEFESA DO NÚCLEO COGNITIVO):")
     print("-" * 80)
@@ -103,6 +111,45 @@ def avaliar_modelo_latencia():
     print("relativo permite comparar a gravidade do desvio de forma percentual e justa.")
     print("Isso garante que um desvio num módulo crítico não passe despercebido, enquanto")
     print("pequenas oscilações aceitáveis em módulos secundários não gerem falsos alarmes.")
+    print("=" * 80)
+
+
+    # Treinamento preditivo com Machine Learning
+  
+    print("\n" + "=" * 80)
+    print("[2] TREINAMENTO DO NOVO MODELO PREDITIVO (REGRESSÃO LINEAR)")
+    print("=" * 80)
+    
+    df_historico = gerar_historico_simulado(150)
+    X = df_historico[['consumo_kwh', 'potencia_w']]
+    y = df_historico['latencia_ms']
+
+    # Divisão Treino e Teste
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    print(f"Dataset simulado dividido: {X_train.shape[0]} amostras de Treino, {X_test.shape[0]} de Teste.")
+
+    # Treinamento e Previsão
+    modelo = LinearRegression()
+    modelo.fit(X_train, y_train)
+    y_pred_ml = modelo.predict(X_test)
+
+    # Avaliação Preditiva
+    mae_ml = mean_absolute_error(y_test, y_pred_ml)
+    mse_ml = mean_squared_error(y_test, y_pred_ml)
+    rmse_ml = np.sqrt(mse_ml)
+    r2_ml = r2_score(y_test, y_pred_ml)
+
+    print(f"\nMétricas do Modelo Preditivo (Conjunto de Teste):")
+    print(f"- MAE:  {mae_ml:.2f} ms")
+    print(f"- RMSE: {rmse_ml:.2f} ms")
+    print(f"- R²:   {r2_ml:.4f}")
+
+    # Avaliação Estrutural (Statsmodels)
+    print("\n[3] AVALIAÇÃO ESTRUTURAL DO MODELO (AIC / BIC):")
+    X_train_sm = sm.add_constant(X_train)
+    modelo_sm = sm.OLS(y_train, X_train_sm).fit()
+    print(f"Critério de Informação de Akaike (AIC): {modelo_sm.aic:.2f}")
+    print(f"Critério de Informação Bayesiano (BIC): {modelo_sm.bic:.2f}")
     print("=" * 80)
 
 if __name__ == "__main__":

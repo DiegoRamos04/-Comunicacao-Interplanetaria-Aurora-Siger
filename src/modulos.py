@@ -76,15 +76,38 @@ def consultar_modulo_especifico():
     print(f"Prioridade operacional: {info['prioridade_operacional']}")
     print(f"Consumo diário:         {info['consumo_energetico_kwh']} kWh")
     print("-" * 60)
+    # Cálculo de potência (Lei de Ohm: P = V * I)
+    tensao = info['tensao_v']
+    corrente = info['corrente_a']
+    potencia_calculada = tensao * corrente
+
     print("MÉTRICAS ELÉTRICAS (LEI DE OHM):")
-    print(f"Tensão:                 {info['tensao_v']} V")
-    print(f"Corrente:               {info['corrente_a']} A")
-    print(f"Potência Aproximada:    {info['potencia_aproximada_w']} W")
+    print(f"Tensão:                 {tensao} V")
+    print(f"Corrente:               {corrente} A")
+    print(f"Pot. Aprox. (Catálogo): {info['potencia_aproximada_w']} W")
+    print(f"Pot. Real Calculada:    {potencia_calculada:.2f} W")
     print("-" * 60)
     print("MÉTRICAS DE COMUNICAÇÃO E REDE:")
     print(f"Necessidade:            {info['necessidade_comunicacao']}")
     print(f"Latência Estimada:      {info['latencia_estimada_ms']} ms")
     print(f"Latência Observada:     {info['latencia_observada_ms']} ms")
+    # Estabilidade com Banco de Capacitores em Paralelo
+    print("-" * 60)
+    print("ESTABILIDADE DA REDE (CAPÍTULO 11 - CAPACITORES):")
+    print("Prevenção contra oscilações (micro-interrupções e picos de demanda).")
+    
+    # Simulação de 3 capacitores comerciais de 4700 µF associados em paralelo
+    c1 = c2 = c3 = 4700e-6 
+    c_eq = c1 + c2 + c3  # Ceq = C1 + C2 + C3
+    
+    # Cálculo da carga (Q = C * V) e da Energia armazenada (En = 1/2 * Q * V)
+    carga_total = c_eq * tensao
+    energia_armazenada = 0.5 * carga_total * tensao
+    
+    print(f"Banco de Proteção:      3x capacitores de 4700 µF (Paralelo)")
+    print(f"Capacitância Equiv.:    {c_eq * 1e6:.2f} µF")
+    print(f"Carga Acumulada (Q):    {carga_total:.4f} C")
+    print(f"Energia de Backup (En): {energia_armazenada:.2f} J")
     
     print("\nConexões:")
     for destino, distancia in info["conexoes"]:

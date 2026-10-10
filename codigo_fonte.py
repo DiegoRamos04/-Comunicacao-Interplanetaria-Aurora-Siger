@@ -47,6 +47,30 @@ def simular_ataque_aleatorio():
     gerenciar_alertas(dados_customizados=dados_simulacao)
     print("\nSimulação concluída com sucesso. (O arquivo original permaneceu intacto no disco).")
 
+def simular_assistente_virtual():
+    # Simula um fluxo de automação low-code (n8n) com Agente de IA e integração via Telegram.
+    print("\n" + "=" * 80)
+    print("   [ASSISTENTE VIRTUAL] SIMULAÇÃO DE WORKFLOW DE COMUNICAÇÃO (LOW-CODE)")
+    print("=" * 80)
+    print("Iniciando orquestração do fluxo de dados...")
+    
+    print("\n[1] Gatilho (Trigger):")
+    print(" -> Webhook / Telegram Trigger acionado.")
+    print(" -> Mensagem recebida do operador: 'Status crítico do módulo de Agricultura, por favor.'")
+    
+    print("\n[2] Processamento Lógico (Node de Assistente):")
+    print(" -> O assistente interpreta a intenção e consulta o 'dados_aurora_siger.json'...")
+    
+    print("\n[3] Ação e Resposta (Action Node):")
+    print(" -> Gerando síntese da resposta para o Telegram...\n")
+    print("""Assistente SCIC (Bot do Telegram):
+   'Atenção, equipe. O módulo de Agricultura apresenta latência de 729ms 
+   (Status: Alerta - Invasão Detectada). A ação automática de isolamento 
+   de falha (FLISR) já foi acionada para manter a resiliência.'""")
+    
+    print("\n[!] Simulação de pipeline (Percepção -> Decisão -> Ação) concluída com sucesso.")
+    print("=" * 80)
+
 def exibir_menu():
     while True:
         # Limpa o terminal para o menu ficar sempre organizado
@@ -64,6 +88,7 @@ def exibir_menu():
         print("7. Busca Ultrarrápida de Módulos (Árvore Trie & Conv. Bases)")
         print("8. [SIMULAÇÃO] Lançar Ataque Aleatório na Rede")
         print("9. Simular Evolução Dinâmica da Rede (EDO & SciPy solve_ivp)")
+        print("10. Simular Assistente Virtual de Comunicação (Integração n8n/Telegram)")
         print("0. Encerrar Sistema")
         print("=" * 60)
 
@@ -87,6 +112,8 @@ def exibir_menu():
             simular_ataque_aleatorio()
         elif opcao == '9':
             simular_evolucao_latencia()
+        elif opcao == '10':
+            simular_assistente_virtual()
         elif opcao == '0':
             print("\nEncerrando comunicação com a Colônia Aurora Siger. Até logo!")
             sys.exit()

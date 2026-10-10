@@ -1,11 +1,29 @@
 import json
 from pathlib import Path
 
+# Algoritmos de conversão numérica 
+def decimal_para_binario(n):
+    if n == 0: return "0"
+    binario = ""
+    while n > 0:
+        binario = str(n % 2) + binario
+        n = n // 2
+    return binario
+
+def decimal_para_hexadecimal(n):
+    hex_chars = "0123456789ABCDEF"
+    if n == 0: return "0"
+    hexadecimal = ""
+    while n > 0:
+        hexadecimal = hex_chars[n % 16] + hexadecimal
+        n = n // 16
+    return hexadecimal
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 ARQUIVO_JSON = BASE_DIR / "data" / "dados_aurora_siger.json"
 
 
-# ETAPA 1.5: ESTRUTURAS DA ÁRVORE TRIE
+# Estruturas da Árvore Trie
 
 class NodoTrie:
     def __init__(self):
@@ -51,14 +69,14 @@ class Trie:
         return resultados
 
 
-# Etapa 1.6: Conversão de bases e exibição
+# Conversão de bases e exibição
 
 def executar_busca_trie():
     print("\n" + "=" * 80)
     print("      SISTEMA DE BUSCA RÁPIDA (TRIE) E CONVERSÃO DE BASES ")
     print("=" * 80)
 
-    # 1. Carregar Dados
+    # Carregar Dados
     try:
         with open(ARQUIVO_JSON, "r", encoding="utf-8") as file:
             dados = json.load(file)
@@ -66,12 +84,12 @@ def executar_busca_trie():
         print("Erro: Arquivo JSON não encontrado.")
         return
 
-    # 2. Inicializar a Árvore Trie e popular com os dados
+    # Inicializar a Árvore Trie e popular com os dados
     arvore_busca = Trie()
     for nome_modulo, info in dados['modulos'].items():
         arvore_busca.inserir(nome_modulo, info)
 
-    # 3. Interação com o usuário
+    # Interação com o usuário
     print("A estrutura Trie permite buscas ultrarrápidas por prefixo (Ex: 'com', 'agri').")
     prefixo = input("Digite o início do nome do módulo que deseja buscar: ").strip()
 
@@ -83,7 +101,7 @@ def executar_busca_trie():
 
     print(f"\nForam encontrados {len(resultados)} módulo(s) com o prefixo '{prefixo}':\n")
 
-    # 4. Exibir resultados e aplicar a Etapa 1.6 (Bases Numéricas)
+    # Exibir resultados 
     for nome_encontrado, info in resultados:
         nome_original = nome_encontrado.title() # Deixa a primeira letra maiúscula
         codigo = info['codigo_dispositivo']
@@ -94,14 +112,15 @@ def executar_busca_trie():
         print(f"Status atual:      {info['status_operacional']}")
         print(f"Latência atual:    {info['latencia_observada_ms']} ms")
         
-        # Etapa 1.6: Eletricidade básica aplicada à computação (Conversões)
-        print("\n--- CONVERSÃO DE BASES NUMÉRICAS (ETAPA 1.6) ---")
-        print("Convertendo a Potência Aproximada para os processadores dos sensores:")
+       # Conversões com algoritmo de divisão 
+        binario_manual = decimal_para_binario(potencia)
+        hexa_manual = decimal_para_hexadecimal(potencia)
+
+        print("\n--- CONVERSÃO DE BASES NUMÉRICAS (ETAPA 1.6 / CAPÍTULO 10) ---")
+        print("Convertendo a Potência via Método da Divisão Sucessiva:")
         print(f"Decimal (Humano):      {potencia} W")
-        # A função bin() retorna algo como '0b1010'. Usamos [2:] para tirar o '0b' e deixar só os números.
-        print(f"Binário (Máquina):     {bin(potencia)[2:]} W")
-        # A função hex() retorna '0x...'. Usamos [2:] e .upper() para ficar no formato clássico (Ex: 1388 -> 1388)
-        print(f"Hexadecimal (Sensor):  {hex(potencia)[2:].upper()} W")
+        print(f"Binário (Máquina):     {binario_manual} W")
+        print(f"Hexadecimal (Sensor):  {hexa_manual} W")
         print("-" * 50)
 
 if __name__ == "__main__":

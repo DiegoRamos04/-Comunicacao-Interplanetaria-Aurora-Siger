@@ -19,7 +19,7 @@ def simular_evolucao_latencia():
     k = 0.4 
     latencia_ambiente = 15.0 # Latência normal esperada (ms)
     
-    # EDO: dL/dt = -k * (L - L_ambiente) -> Lei de ajuste dinâmico inspirada em Newton
+    # EDO: dL/dt = -k * (L - L_ambiente) -> Lei de ajuste dinâmico 
     def edo_latencia(t, L):
         return -k * (L - latencia_ambiente)
 
