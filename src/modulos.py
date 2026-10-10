@@ -93,7 +93,7 @@ def consultar_modulo_especifico():
     print(f"Latência Observada:     {info['latencia_observada_ms']} ms")
     # Estabilidade com Banco de Capacitores em Paralelo
     print("-" * 60)
-    print("ESTABILIDADE DA REDE (CAPÍTULO 11 - CAPACITORES):")
+    print("ESTABILIDADE DA REDE:")
     print("Prevenção contra oscilações (micro-interrupções e picos de demanda).")
     
     # Simulação de 3 capacitores comerciais de 4700 µF associados em paralelo

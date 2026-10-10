@@ -9,7 +9,7 @@ PASTA_GRAFICOS = BASE_DIR / "graficos_ou_imagens"
 def simular_evolucao_latencia():
     """
     Simula a evolução temporal da latência de um módulo comprometido 
-    retornando ao estado estável, utilizando EDO de 1ª ordem (Capítulo 5).
+    retornando ao estado estável, utilizando EDO de 1ª ordem.
     """
     print("\n" + "=" * 80)
     print("      SIMULAÇÃO DINÂMICA DE REDE (EQUAÇÕES DIFERENCIAIS - EDO / SCIPY)")

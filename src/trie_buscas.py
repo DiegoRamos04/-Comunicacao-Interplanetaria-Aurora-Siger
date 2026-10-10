@@ -116,7 +116,7 @@ def executar_busca_trie():
         binario_manual = decimal_para_binario(potencia)
         hexa_manual = decimal_para_hexadecimal(potencia)
 
-        print("\n--- CONVERSÃO DE BASES NUMÉRICAS (ETAPA 1.6 / CAPÍTULO 10) ---")
+        print("\n--- CONVERSÃO DE BASES NUMÉRICAS ---")
         print("Convertendo a Potência via Método da Divisão Sucessiva:")
         print(f"Decimal (Humano):      {potencia} W")
         print(f"Binário (Máquina):     {binario_manual} W")

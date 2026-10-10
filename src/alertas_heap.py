@@ -8,7 +8,7 @@ ARQUIVO_JSON = BASE_DIR / "data" / "dados_aurora_siger.json"
 
 def gerenciar_alertas(dados_customizados=None):
     print("\n" + "=" * 80)
-    print("      SISTEMA DE PRIORIZAÇÃO DE ALERTAS (ETAPAS 1.2 E 1.4 - HEAP)")
+    print("      SISTEMA DE PRIORIZAÇÃO DE ALERTAS ")
     print("=" * 80)
 
     # Se recebeu os dados simulados da memória, usa eles. Se não, lê o arquivo normal.

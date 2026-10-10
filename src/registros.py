@@ -72,8 +72,9 @@ def consultar_registros():
             tabela.append([numero, data, modulo, ocorrencia, responsavel])
         except (IndexError, ValueError):
             tabela.append([numero, "N/A", "N/A", linha, "N/A"])
-
-    print(tabela)
+            
+    print("\n")
+    for reg in tabela:
+        print(f"[{reg[1]}] ID: {reg[0]} | Módulo: {reg[2]} | Ocorrência: {reg[3]} | Resp: {reg[4]}")
 
     print(f"\nTotal de registros: {len(tabela)}")
-
