@@ -18,7 +18,7 @@ O projeto também integra conceitos de estruturas de dados avançadas para busca
 
 * **Linguagem:** Python
 * **Manipulação de Dados:** `pandas` (necessária para leitura, limpeza e organização tabular dos dados operacionais da colônia) e JSON.
-* **Estruturas de Dados:** Tries (para busca ultrarrápida por prefixos) e Min/Max Heaps (para filas de prioridade e escalonamento de alertas).
+* **Estruturas de Dados:** `Tries` (para busca ultrarrápida por prefixos) e Min/Max Heaps (para filas de prioridade e escalonamento de alertas).
 * **Visualização:** `matplotlib` (utilizada para a plotagem gráfica e visualização diagnóstica das anomalias de rede).
 * **Machine Learning e Simulação Numérica:** 
   * `scikit-learn`: Implementação do modelo preditivo e cálculo das métricas de performance (MAE, MSE, RMSE e R²).
