@@ -28,30 +28,30 @@ O projeto também integra conceitos de estruturas de dados avançadas para busca
 ## Estrutura do Projeto
 
 ```text
-📁 -Comunicacao-Interplanetaria-Aurora-Siger/
+  -Comunicacao-Interplanetaria-Aurora-Siger/
 │
-├── 📄 codigo_fonte.py             # Script principal de orquestração do sistema
-├── 📄 README.md                   # Documentação do projeto
-├── 📄 .gitignore                  # Arquivos ignorados pelo Git
+├──  codigo_fonte.py              
+├──  README.md                   
+├──  .gitignore                  
 │
-├── 📁 data/                       # Bases de dados da colônia
-│   ├── 📄 dados_aurora_siger.json     
-│   └── 📄 registros_colonia.txt       
+├──  data/                       
+│   ├──  dados_aurora_siger.json     
+│   └──  registros_colonia.txt       
 │
-├── 📁 docs/                       # Documentações e fundamentação teórica
-│   ├── 📄 relatorio_tecnico.pdf   # Relatório com a explicação técnica e reflexão social
-│   └── 📄 link_video.txt          # Link para o vídeo de apresentação no YouTube
+├──  docs/                       
+│   ├──  relatorio_tecnico.pdf   
+│   └──  link_video.txt          
 │
-├── 📁 graficos_ou_imagens/        # Visualizações de dados e outputs
-│   ├── 🖼️ grafico_anomalia_rede.png 
-│   └── 🖼️ grafico_dinamica_rede.png
-└── 📁 src/                        # Código-fonte e módulos auxiliares
-    ├── 📄 alertas_heap.py         # Lógica de priorização de alertas (Heap)
-    ├── 📄 avaliacao_modelo.py     # Scripts de validação e testes
-    ├── 📄 dinamica_rede.py        # Simulação EDO e recuperação de rede (SciPy)
-    ├── 📄 modulos.py              # Funções modulares de apoio (Pandas e Lei de Ohm)
-    ├── 📄 registros.py            # Manipulação de logs e registros manuais
-    └── 📄 trie_buscas.py          # Lógica de busca otimizada e conversão (Trie)
+├──  graficos_ou_imagens/        
+│   ├── grafico_anomalia_rede.png 
+│   └── grafico_dinamica_rede.png
+└──  src/                       
+    ├──  alertas_heap.py         
+    ├──  avaliacao_modelo.py     
+    ├──  dinamica_rede.py        
+    ├──  modulos.py              
+    ├──  registros.py            
+    └──  trie_buscas.py         
 ```
 ## Como Executar o Projeto
 
